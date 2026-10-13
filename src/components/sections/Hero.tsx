@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -14,10 +14,8 @@ import {
 import { personalInfo } from "@/data/portfolioData";
 import { Button } from "../ui/Button";
 import { Badge } from "../ui/Badge";
-import { CvModal } from "../ui/CvModal";
 
 export const Hero: React.FC = () => {
-  const [cvModalOpen, setCvModalOpen] = useState(false);
 
   return (
     <>
@@ -76,10 +74,15 @@ export const Hero: React.FC = () => {
                 </Button>
 
                 <Button
+                  asLink
+                  href="/cv.pdf"
+                  download="Mohamed-Hamdy-CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   variant="outline"
                   size="lg"
-                  onClick={() => setCvModalOpen(true)}
                   icon={<Download className="w-4 h-4" />}
+                  aria-label="Download Mohamed Hamdy's CV (PDF)"
                 >
                   Download CV
                 </Button>
@@ -177,9 +180,6 @@ export const Hero: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* CV Modal */}
-      <CvModal isOpen={cvModalOpen} onClose={() => setCvModalOpen(false)} />
     </>
   );
 };

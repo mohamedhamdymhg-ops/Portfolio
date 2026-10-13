@@ -133,7 +133,7 @@ In compliance with instructions, the website adheres to complete factual accurac
 - **No Invented Metrics or Clients**: No fake percentages, ROI numbers, or undisclosed client names.
 - **Paid Advertising Transparency**: Listed as an area of strength and an offered service, with explicit notice that paid advertising campaigns have not yet been run for clients.
 - **DEPI Status**: Clearly presented as **In Progress** (17 July 2026 – 2 December 2026) under Education / Professional Development.
-- **CV Download**: Marked as **In Preparation** via an interactive modal with direct email request actions until the final PDF is linked.
+- **CV Download**: Links directly to `/cv.pdf` for one-click downloading and in-browser viewing.
 - **Oracle Certification**: Official "AI for You" (September 2026) credential highlighted.
 - **Excluded Sections**: Testimonials and Blog/Articles sections are omitted as requested.
 
@@ -155,9 +155,9 @@ Edit [`src/data/projectsData.ts`](file:///g:/Digital%20markting%20CLS/Portfolio/
 - Categorize by `category: "Content Strategy" | "Social Media Design" | "Visual Identity"`
 
 ### 3. Replacing the CV File
-When the finalized CV PDF is ready:
-1. Place the PDF in `public/cv.pdf`.
-2. In [`src/components/ui/CvModal.tsx`](file:///g:/Digital%20markting%20CLS/Portfolio/src/components/ui/CvModal.tsx) or [`src/components/sections/Hero.tsx`](file:///g:/Digital%20markting%20CLS/Portfolio/src/components/sections/Hero.tsx), update the CTA button to link directly to `/cv.pdf` with the `download` attribute.
+The "Download CV" buttons link directly to `/cv.pdf`.
+1. Place your finalized CV PDF at `public/cv.pdf`.
+2. Any visitor clicking "Download CV" will immediately download or open this PDF.
 
 ### 4. Updating the Profile Image
 The portfolio uses the authentic photo at `public/images/mohamed-hamdy.jpeg`. If an updated portrait is taken:

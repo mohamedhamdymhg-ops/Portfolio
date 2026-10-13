@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { X, FileText, Mail, Phone, Check, ArrowRight } from "lucide-react";
+import React, { useEffect } from "react";
+import { X, FileText, Download, ExternalLink, Phone, FileCheck } from "lucide-react";
 import { Button } from "./Button";
 import { Badge } from "./Badge";
+import { personalInfo } from "@/data/portfolioData";
 
 interface CvModalProps {
   isOpen: boolean;
@@ -11,8 +12,6 @@ interface CvModalProps {
 }
 
 export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
-  const [copied, setCopied] = useState(false);
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -28,12 +27,6 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText("mohamed.hamdy.mhg@gmail.com");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
 
   return (
     <div
@@ -62,8 +55,8 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className="mb-2">
-          <Badge variant="yellow" size="sm">
-            Status: In Preparation
+          <Badge variant="emerald" size="sm" icon={<FileCheck className="w-3.5 h-3.5" />}>
+            Verified Document (PDF)
           </Badge>
         </div>
 
@@ -73,44 +66,47 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
 
         <div className="mt-3 text-sm sm:text-base text-neutral-600 dark:text-neutral-400 space-y-3">
           <p>
-            Mohamed Hamdy’s updated Curriculum Vitae is currently being finalized to incorporate recent client deliverables and coursework from the Digital Egypt Pioneers Initiative (DEPI).
-          </p>
-          <p className="text-xs bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 p-3 rounded-lg">
-            <strong>Placeholder Notice:</strong> A downloadable PDF file will be linked here once finalized. In the meantime, you can request an advance copy or reach out directly.
+            Official resume for <strong className="text-neutral-900 dark:text-white">{personalInfo.name}</strong>, detailing client content strategies, social media post designs, DEPI digital marketing training, and educational background.
           </p>
         </div>
 
-        {/* Contact Quick Actions */}
+        {/* Direct Download & View Actions */}
         <div className="mt-6 pt-5 border-t border-neutral-200 dark:border-neutral-800/80 space-y-3">
           <div className="flex flex-col sm:flex-row gap-2.5">
             <Button
+              asLink
+              href="/cv.pdf"
+              download="Mohamed-Hamdy-CV.pdf"
               variant="primary"
               size="md"
               className="flex-1"
-              icon={copied ? <Check className="w-4 h-4" /> : <Mail className="w-4 h-4" />}
-              onClick={copyEmail}
+              icon={<Download className="w-4 h-4" />}
+              aria-label="Download Mohamed Hamdy's CV as PDF"
             >
-              {copied ? "Email Copied!" : "Copy Email"}
+              Download CV
             </Button>
             <Button
               asLink
-              href="mailto:mohamed.hamdy.mhg@gmail.com?subject=CV%20Request%20-%20Mohamed%20Hamdy"
+              href="/cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               variant="outline"
               size="md"
               className="flex-1"
-              icon={<ArrowRight className="w-4 h-4" />}
+              icon={<ExternalLink className="w-4 h-4" />}
+              aria-label="Open CV PDF in a new tab"
             >
-              Request via Email
+              Open in Browser
             </Button>
           </div>
 
-          <div className="text-center">
+          <div className="text-center pt-1">
             <a
-              href="tel:+201080929267"
+              href={`tel:${personalInfo.phone}`}
               className="inline-flex items-center gap-1.5 text-xs text-neutral-500 hover:text-amber-500 transition-colors"
             >
-              <Phone className="w-3.5 h-3.5" />
-              <span>Or call directly: +20 108 092 9267</span>
+              <Phone className="w-3.5 h-3.5 text-amber-500" />
+              <span>Direct Phone / WhatsApp: {personalInfo.phone}</span>
             </a>
           </div>
         </div>

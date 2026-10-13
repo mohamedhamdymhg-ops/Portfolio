@@ -10,6 +10,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   href?: string;
   target?: string;
   rel?: string;
+  download?: boolean | string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -23,6 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
   href,
   target,
   rel,
+  download,
   ...props
 }) => {
   const baseStyles =
@@ -49,7 +51,13 @@ export const Button: React.FC<ButtonProps> = ({
 
   if (asLink && href) {
     return (
-      <a href={href} className={combinedStyles} target={target} rel={rel}>
+      <a
+        href={href}
+        download={download}
+        className={combinedStyles}
+        target={target}
+        rel={rel}
+      >
         {icon && iconPosition === "left" && <span className="flex-shrink-0">{icon}</span>}
         <span>{children}</span>
         {icon && iconPosition === "right" && <span className="flex-shrink-0">{icon}</span>}
